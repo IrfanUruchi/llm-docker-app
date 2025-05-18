@@ -41,14 +41,16 @@ Built as part of the **Introduction to Artificial Intelligence** course at South
 
 ## Project Structure
 
+```text
 llm-docker-app/
 ├── app/
-│ ├── main.py 
-│ ├── model_utils.py
+│   ├── main.py
+│   └── model_utils.py
 ├── web/
-│ └── index.html 
+│   └── index.html
 ├── requirements.txt
 └── Dockerfile
+```
 
 
 ---
