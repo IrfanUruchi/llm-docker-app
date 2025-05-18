@@ -48,7 +48,7 @@ llm-docker-app/
 ├── web/
 │ └── index.html 
 ├── requirements.txt
-├── Dockerfile
+└── Dockerfile
 
 
 ---
@@ -63,8 +63,8 @@ llm-docker-app/
 ### Clone and Build
 
 ```bash
-git clone https://github.com/IrfanUruchi/llm-docker-app
-cd llm-docker-app
+git clone git clone https://github.com/IrfanUruchi/llm-docker-app.git
+cd llm-docker-app/llm-docker-app
 docker build -t llm-fastapi:latest .
 ```
 
