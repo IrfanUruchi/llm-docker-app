@@ -35,7 +35,7 @@ Built as part of the **Introduction to Artificial Intelligence** course at South
 | Warm Latency (p95)    | 0.75 s             | **0.46 s** (↓ 39 %)   |
 | Peak RAM Usage        | 6.2 GB             | **5.2 GB** (↓ 16 %)   |
 | Docker Image Size     | 8 GB               | **4 GB** (↓ 50 %)     |
-| Build Time            | ~10 min            | **~1 min**            |
+| Build Time            | ~10 min            | **~2 min**            |
 
 ---
 
@@ -46,6 +46,9 @@ llm-docker-app/
 ├── app/
 │   ├── main.py
 │   └── model_utils.py
+├── bench/
+│   ├── benchmark_inference.py
+│   └── run_benchmarks.sh
 ├── web/
 │   └── index.html
 ├── requirements.txt
