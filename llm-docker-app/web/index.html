@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Φ-Chat</title>
+<style>
+  body{margin:0;font-family:system-ui,BlinkMacSystemFont,"Segoe UI",sans-serif;
+       background:#f5f7fa;height:100vh;display:flex;flex-direction:column}
+  header{padding:1rem;color:#fff;text-align:center;
+         background:linear-gradient(135deg,#4b6cb7 0%,#182848 100%)}
+  #chat{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column}
+  .bubble{max-width:75%;padding:.8rem 1rem;border-radius:1rem;line-height:1.4}
+  .user{align-self:flex-end;background:#42526e;color:#fff}
+  .bot {align-self:flex-start;background:#e4e6eb;color:#000}
+  #controls{display:flex;gap:.5rem;padding:.5rem;background:#fff;border-top:1px solid #ddd}
+  textarea{flex:1;border:1px solid #ccc;border-radius:.5rem;padding:.5rem;font-size:1rem;resize:none}
+  button{cursor:pointer;background:#4b6cb7;color:#fff;border:none;border-radius:.5rem;padding:0 1rem}
+  button:disabled{background:#a0aec0}
+</style>
+</head>
+<body>
+<header><h1>LLM Docker App - Introduction to AI</h1></header>
+
+<main id="chat"></main>
+
+<div id="controls">
+  <textarea id="prompt" rows="2" placeholder="Type your message…"></textarea>
+  <button id="send" disabled>Send</button>
+</div>
+
+<script>
+const chat   = document.getElementById("chat");
+const prompt = document.getElementById("prompt");
+const send   = document.getElementById("send");
+
+prompt.addEventListener("input", () => send.disabled = !prompt.value.trim());
+
+send.addEventListener("click", async () => {
+  if (!prompt.value.trim()) return;
+  addBubble(prompt.value, "user");
+  const payload = { prompt: prompt.value };
+  prompt.value = "";  send.disabled = true;
+
+  const typing = addBubble("…", "bot");
+  const res = await fetch("/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+  }).then(r => r.json());
+
+  typing.textContent = res.response;
+  chat.scrollTop = chat.scrollHeight;
+});
+
+function addBubble(text, cls){
+  const div = document.createElement("div");
+  div.className = `bubble ${cls}`;
+  div.textContent = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+  return div;
+}
+</script>
+</body></html>
